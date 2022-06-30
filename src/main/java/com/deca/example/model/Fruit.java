@@ -17,7 +17,7 @@ public class Fruit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "fruit_id")
-    private Long fruitId;
+    private Integer fruitId;
 
     @Column(name = "fruit_name", nullable = false, unique = true, updatable = false)
     private String fruitName;

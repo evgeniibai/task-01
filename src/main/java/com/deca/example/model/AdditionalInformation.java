@@ -24,7 +24,7 @@ public class AdditionalInformation {
     @Column(name = "last_name")
     private String lastName;
 
-    @Email(message = "") // TODO message, mb? regex
+    @Email(message = "${not.valid.email}")
     @Column(name = "email", unique = true)
     private String email;
 
@@ -32,9 +32,18 @@ public class AdditionalInformation {
     private String phoneNumber;
 
     @OneToOne(mappedBy = "information",
-            cascade = CascadeType.ALL, // TODO think about cascade
+            cascade = {CascadeType.PERSIST,
+                    CascadeType.DETACH,
+                    CascadeType.MERGE,
+                    CascadeType.REFRESH},
             fetch = FetchType.LAZY)
     private User user;
 
-    //TODO toString
+    @Override
+    public String toString() {
+        return firstName + ", " +
+                lastName + "[ " +
+                email + ", " +
+                phoneNumber + " ]";
+    }
 }

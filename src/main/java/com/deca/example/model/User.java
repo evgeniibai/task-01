@@ -31,7 +31,7 @@ public class User {
     @Transient
     private String confirmedPassword;
 
-    @OneToOne(cascade = CascadeType.ALL, // TODO think about cascade @link AdditionalInformation.class
+    @OneToOne(cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
     @JoinColumn(name = "user_info")
     private AdditionalInformation information;
@@ -48,4 +48,12 @@ public class User {
     @JoinTable(joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "fruit_id"))
     private List<Fruit> fruits;
+
+    @Override
+    public String toString() {
+        return uuid + ": " +
+                username + " [ " +
+                fruits + " ] " +
+                "<" + status + ">";
+    }
 }
