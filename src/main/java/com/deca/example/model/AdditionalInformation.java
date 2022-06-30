@@ -24,7 +24,7 @@ public class AdditionalInformation {
     @Column(name = "last_name")
     private String lastName;
 
-    @Email(message = "${not.valid.email}")
+    @Email(message = "${Not.valid.email}")
     @Column(name = "email", unique = true)
     private String email;
 

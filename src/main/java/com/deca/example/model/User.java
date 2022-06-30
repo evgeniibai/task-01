@@ -4,6 +4,9 @@ package com.deca.example.model;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
@@ -13,7 +16,7 @@ import java.util.List;
 @Getter
 @Setter
 public class User {
-
+    //TODO think about implements Serializable interface
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // TODO SEQUENCE
     @Column(name = "user_id")
@@ -22,9 +25,13 @@ public class User {
     @Column(name = "uuid", nullable = false, unique = true, updatable = false)
     private String uuid;
 
+    @NotBlank(message = "${Required}")
+    @Size(min = 4, max = 32, message = "${Form.size.username}")
     @Column(name = "username", nullable = false, unique = true, updatable = false)
     private String username;
 
+    @NotBlank(message = "${Required}")
+    @Size(min = 8, message = "${Form.size.password}")
     @Column(name = "password", nullable = false)
     private String password;
 
@@ -45,7 +52,8 @@ public class User {
     private Status status;
 
     @ManyToMany
-    @JoinTable(joinColumns = @JoinColumn(name = "user_id"),
+    @JoinTable(name = "users_fruits" ,
+            joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "fruit_id"))
     private List<Fruit> fruits;
 

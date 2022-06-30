@@ -1,16 +1,17 @@
 -- Table: Fruits.
 create table if not exists fruits (
 	fruit_id int primary key auto_increment,
-    fruit_name varchar(100) not null,
-    unique(fruit_name)
+    uin varchar(8) not null,
+    fruit_name varchar(50) not null,
+    unique(uin, fruit_name)
 );
 
 -- Table: User Additional Information.
 create table if not exists add_info (
 	info_id bigint primary key auto_increment,
     first_name varchar(50),
-    last_name varchar(150),
-    email varchar(250),
+    last_name varchar(100),
+    email varchar(255),
     phone_number varchar(15),
     unique(email, phone_number)
 );
@@ -19,11 +20,11 @@ create table if not exists add_info (
 create table if not exists users (
 	user_id bigint primary key auto_increment,
     uuid varchar(36) not null,
-    username varchar(100) not null,
+    username varchar(32) not null,
     password varchar(255) not null,
     user_info bigint,
-    user_role varchar(20) not null default 'USER',
-    user_status varchar(20) not null default 'ACTIVE',
+    user_role varchar(15) not null default 'USER',
+    user_status varchar(15) not null default 'ACTIVE',
     unique(uuid, username),
     foreign key(user_info) references add_info(info_id)
 );
@@ -38,8 +39,8 @@ create table if not exists users_fruits (
 );
 
 -- Insert Information
-insert into fruits values (1, 'Apple');
-insert into fruits values (2, 'Banana');
+insert into fruits values (1, '001a24c3', 'Apple');
+insert into fruits values (2, '002bb8d0', 'Banana');
 
 insert into add_info values (1, 'Eugene', 'Bay', 'eugenebay@supermail.com', '9135082020');
 

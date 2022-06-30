@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
@@ -19,6 +20,8 @@ public class Fruit {
     @Column(name = "fruit_id")
     private Integer fruitId;
 
+    @Column(name = "uin", nullable = false, unique = true, updatable = false)
+    private String uin;
     @Column(name = "fruit_name", nullable = false, unique = true, updatable = false)
     private String fruitName;
 
@@ -27,6 +30,7 @@ public class Fruit {
 
     @Override
     public String toString() {
-        return fruitName;
+        return uin + ": " +
+                fruitName;
     }
 }
